@@ -1,0 +1,19 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+jms_serializer:
+    metadata:
+        directories:
+            sylius-shipping:
+                namespace_prefix: "Sylius\\Component\\Shipping"
+                path: "@SyliusShippingBundle/Resources/config/serializer"
+
+sylius_shipping:
+    shipping_method_rule:
+        validation_groups:
+            total_weight_greater_than_or_equal:
+                - 'sylius'
+                - 'sylius_shipping_method_rule_total_weight'
+            total_weight_less_than_or_equal:
+                - 'sylius'
+                - 'sylius_shipping_method_rule_total_weight'

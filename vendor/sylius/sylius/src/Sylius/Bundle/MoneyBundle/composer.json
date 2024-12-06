@@ -1,0 +1,83 @@
+{
+    "name": "sylius/money-bundle",
+    "type": "symfony-bundle",
+    "description": "Currencies and money formatting engine bundle for Symfony.",
+    "keywords": [
+        "cash",
+        "currency",
+        "money",
+        "currencies"
+    ],
+    "homepage": "https://sylius.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "https://pjedrzejewski.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "https://sylius.com"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "friendsofsymfony/rest-bundle": "^3.0",
+        "jms/serializer-bundle": "^4.2",
+        "php": "^8.1",
+        "sylius/resource-bundle": "^1.9",
+        "symfony/framework-bundle": "^5.4.21 || ^6.4",
+        "symfony/intl": "^5.4.21 || ^6.4",
+        "symfony/templating": "^5.4.21 || ^6.4",
+        "webmozart/assert": "^1.9"
+    },
+    "conflict": {
+        "twig/twig": "^1.0 || 3.9.0"
+    },
+    "require-dev": {
+        "doctrine/doctrine-bundle": "^1.12 || ^2.3.1",
+        "doctrine/orm": "^2.13",
+        "phpspec/phpspec": "^7.2",
+        "phpunit/phpunit": "^9.5",
+        "polishsymfonycommunity/symfony-mocker-container": "^1.0",
+        "sylius/currency-bundle": "^1.13",
+        "symfony/browser-kit": "^5.4.21 || ^6.4",
+        "symfony/dependency-injection": "^5.4.21 || ^6.4",
+        "symfony/form": "^5.4.21 || ^6.4",
+        "twig/twig": "^2.12 || ^3.3"
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.13-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Sylius\\Bundle\\MoneyBundle\\": ""
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sylius\\Bundle\\MoneyBundle\\spec\\": "spec/"
+        },
+        "classmap": [
+            "test/app/AppKernel.php"
+        ]
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

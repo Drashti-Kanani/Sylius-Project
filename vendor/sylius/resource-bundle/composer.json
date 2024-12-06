@@ -1,0 +1,148 @@
+{
+    "name": "sylius/resource-bundle",
+    "type": "symfony-bundle",
+    "description": "Resource component for Sylius.",
+    "keywords": [
+        "resource",
+        "storage",
+        "persistence",
+        "sylius"
+    ],
+    "homepage": "https://sylius.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "https://pjedrzejewski.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "https://sylius.com"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "babdev/pagerfanta-bundle": "^3.7 || ^4.0",
+        "doctrine/annotations": "^2.0",
+        "doctrine/collections": "^1.8 || ^2.0",
+        "doctrine/event-manager": "^1.1 || ^2.0",
+        "doctrine/inflector": "^1.4 || ^2.0",
+        "doctrine/persistence": "^2.0 || ^3.0",
+        "gedmo/doctrine-extensions": "^2.4.12 || ^3.0",
+        "sylius/registry": "^1.2",
+        "symfony/config": "^5.4 || ^6.4 || ^7.0",
+        "symfony/deprecation-contracts": "^2.1 || ^3.0",
+        "symfony/expression-language": "^5.4 || ^6.4 || ^7.0",
+        "symfony/form": "^5.4 || ^6.4 || ^7.0",
+        "symfony/framework-bundle": "^5.4 || ^6.4 || ^7.0",
+        "symfony/http-foundation": "^5.4 || ^6.4 || ^7.0",
+        "symfony/intl": "^5.4 || ^6.4 || ^7.0",
+        "symfony/security-core": "^5.4 || ^6.4 || ^7.0",
+        "symfony/security-csrf": "^5.4 || ^6.4 || ^7.0",
+        "symfony/routing": "^5.4 || ^6.4 || ^7.0",
+        "symfony/translation": "^5.4 || ^6.4 || ^7.0",
+        "symfony/twig-bundle": "^5.4 || ^6.4 || ^7.0",
+        "symfony/validator": "^5.4 || ^6.4 || ^7.0",
+        "symfony/yaml": "^5.4 || ^6.4 || ^7.0",
+        "webmozart/assert": "^1.8",
+        "willdurand/negotiation": "^3.1"
+    },
+    "replace": {
+        "sylius/resource": "self.version"
+    },
+    "require-dev": {
+        "doctrine/doctrine-bundle": "^2.0",
+        "doctrine/orm": "^2.18",
+        "friendsofsymfony/rest-bundle": "^3.0",
+        "jms/serializer-bundle": "^3.5 || ^4.0 || ^5.0",
+        "lchrusciel/api-test-case": "^5.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.2.1 || ^5.1",
+        "pagerfanta/pagerfanta": "^3.7 || ^4.0",
+        "pamil/phpspec-skip-example-extension": "^4.2",
+        "phpspec/phpspec": "^7.3",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpstan/phpstan": "^1.7",
+        "phpstan/phpstan-phpunit": "^1.1",
+        "phpstan/phpstan-webmozart-assert": "^1.2",
+        "phpunit/phpunit": "^9.5",
+        "rector/rector": "^0.18.2",
+        "sylius-labs/coding-standard": "^4.0",
+        "sylius/grid-bundle": "^1.11 || ^1.13@beta",
+        "symfony/console": "^5.4 || ^6.4 || ^7.0",
+        "symfony/css-selector": "^5.4 || ^6.4 || ^7.0",
+        "symfony/dependency-injection": "^5.4 || ^6.4 || ^7.0",
+        "symfony/dotenv": "^5.4 || ^6.4 || ^7.0",
+        "symfony/http-kernel": "^5.4 || ^6.4 || ^7.0",
+        "symfony/stopwatch": "^5.4 || ^6.4 || ^7.0",
+        "symfony/uid": "^5.4 || ^6.4 || ^7.0",
+        "symfony/workflow": "^5.4 || ^6.4 || ^7.0",
+        "symfony/messenger": "^5.4 || ^6.4 || ^7.0",
+        "symfony/serializer": "^5.4 || ^6.4 || ^7.0",
+        "symfony/security-bundle": "^5.4 || ^6.4 || ^7.0",
+        "twig/twig": "^3.0",
+        "vimeo/psalm": "^5.20",
+        "willdurand/hateoas-bundle": "^2.0",
+        "winzou/state-machine-bundle": "^0.6.2"
+    },
+    "conflict": {
+        "doctrine/orm": "<2.18 || ^3.0",
+        "doctrine/doctrine-bundle": "<2.0 || ^3.0",
+        "friendsofsymfony/rest-bundle": "<3.0",
+        "jms/serializer-bundle": "<3.5",
+        "willdurand/hateoas-bundle": "<2.0 || ^2.6",
+        "winzou/state-machine-bundle": "<0.6.2",
+        "twig/twig": "<3.0"
+    },
+    "suggest": {
+        "doctrine/orm": "^2.20",
+        "sylius/locale": "^1.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true,
+            "dealerdirect/phpcodesniffer-composer-installer": false
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "symfony": {
+            "require": "^6.4"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Sylius\\Bundle\\ResourceBundle\\": "src/Bundle/",
+            "Sylius\\Component\\Resource\\": "src/Component/legacy/src/",
+            "Sylius\\Resource\\": "src/Component/src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "spec\\Sylius\\Bundle\\ResourceBundle\\": "src/Bundle/spec/",
+            "spec\\Sylius\\Resource\\": "src/Component/spec/",
+            "Sylius\\Bundle\\ResourceBundle\\Tests\\": "tests/Bundle/",
+            "Sylius\\Component\\Resource\\spec\\": "src/Component/legacy/spec/",
+            "Sylius\\Component\\Resource\\Tests\\": "src/Component/legacy/tests/",
+            "Sylius\\Resource\\Tests\\": "src/Component/tests/",
+            "App\\": "tests/Application/src/"
+        }
+    },
+    "scripts": {
+        "analyse": [
+            "@composer validate --strict",
+            "vendor/bin/ecs check",
+            "vendor/bin/phpstan analyse --ansi --memory-limit=256M -c phpstan.neon -l max src"
+        ],
+        "fix": [
+            "vendor/bin/ecs check --fix"
+        ],
+        "test": [
+            "vendor/bin/phpspec run --ansi --no-interaction",
+            "vendor/bin/phpunit --colors=always"
+        ]
+    }
+}

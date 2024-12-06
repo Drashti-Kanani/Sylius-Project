@@ -1,0 +1,138 @@
+{
+    "name": "sylius/grid-bundle",
+    "type": "symfony-bundle",
+    "description": "Amazing grids with support of filters and custom fields integrated into Symfony.",
+    "keywords": [
+        "admin",
+        "api",
+        "crud",
+        "doctrine",
+        "grid",
+        "resource",
+        "sylius"
+    ],
+    "homepage": "https://sylius.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "https://pjedrzejewski.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "https://sylius.com"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0",
+        "sylius/registry": "^1.5",
+        "symfony/config": "^5.4 || ^6.4 || ^7.0",
+        "symfony/dependency-injection": "^5.4 || ^6.4 || ^7.0",
+        "symfony/deprecation-contracts": "^2.2 || ^3.1",
+        "symfony/event-dispatcher": "^5.4 || ^6.4 || ^7.0",
+        "symfony/form": "^5.4 || ^6.4 || ^7.0",
+        "symfony/framework-bundle": "^5.4 || ^6.4 || ^7.0",
+        "symfony/http-kernel": "^5.4 || ^6.4 || ^7.0",
+        "symfony/options-resolver": "^5.4 || ^6.4 || ^7.0",
+        "symfony/property-access": "^5.4 || ^6.4 || ^7.0",
+        "webmozart/assert": "^1.9"
+    },
+    "replace": {
+        "sylius/grid": "self.version"
+    },
+    "conflict": {
+        "twig/twig": "<2.12",
+        "pagerfanta/core": "<3.7",
+        "pagerfanta/doctrine-phpcr-odm-adapter": "<3.7",
+        "pagerfanta/doctrine-dbal-adapter": "<3.7",
+        "pagerfanta/doctrine-orm-adapter": "<3.7",
+        "pagerfanta/pagerfanta": "<3.7"
+    },
+    "require-dev": {
+        "doctrine/doctrine-bundle": "^1.12 || ^2.0",
+        "doctrine/orm": "^2.8",
+        "doctrine/persistence": "^1.3 || ^2.0 || ^3.1",
+        "doctrine/phpcr-odm": "^1.5 || ^2.0",
+        "jackalope/jackalope-doctrine-dbal": "^2.0",
+        "lchrusciel/api-test-case": "^5.0",
+        "matthiasnoback/symfony-config-test": "^5.1",
+        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
+        "pagerfanta/pagerfanta": "^3.7 || ^4.0",
+        "pamil/phpspec-skip-example-extension": "^4.2",
+        "phpspec/phpspec": "^7.2",
+        "phpstan/phpstan": "^1.7",
+        "phpstan/phpstan-phpunit": "^1.1",
+        "phpstan/phpstan-webmozart-assert": "^1.2",
+        "phpunit/phpunit": "^9.5",
+        "sylius-labs/coding-standard": "^4.0",
+        "sylius/resource-bundle": "^1.12",
+        "symfony/console": "^5.4 || ^6.4 || ^7.0",
+        "symfony/css-selector": "^5.4 || ^6.4 || ^7.0",
+        "symfony/dotenv": "^5.4 || ^6.4 || ^7.0",
+        "symfony/maker-bundle": "^1.36",
+        "symfony/polyfill-mbstring": "<1.22.0 || >1.22.0",
+        "symfony/twig-bundle": "^5.4 || ^6.4 || ^7.0",
+        "twig/twig": "^2.12 || ^3.0",
+        "vimeo/psalm": "^5.23",
+        "rector/rector": "^0.13"
+    },
+    "suggest": {
+        "sylius/currency-bundle": "^1.7"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.11-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Sylius\\Bundle\\GridBundle\\": "src/Bundle/",
+            "Sylius\\Component\\Grid\\": "src/Component/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sylius\\Bundle\\GridBundle\\spec\\": "src/Bundle/spec/",
+            "Sylius\\Component\\Grid\\spec\\": "src/Component/spec/",
+            "App\\": "tests/Application/src/",
+            "AppBundle\\": "src/Bundle/test/src/AppBundle/",
+            "App\\Tests\\Tmp\\": "tests/Application/tmp/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true,
+            "dealerdirect/phpcodesniffer-composer-installer": false
+        }
+    },
+    "scripts": {
+        "analyse": [
+            "@composer validate --strict",
+            "vendor/bin/ecs check",
+            "vendor/bin/phpstan analyse --ansi -c phpstan.neon -l max src",
+            "vendor/bin/psalm"
+        ],
+        "fix": [
+            "vendor/bin/ecs check --fix"
+        ],
+        "test-yaml-config": [
+            "vendor/bin/phpspec run --ansi --no-interaction",
+            "APP_ENV=test_grids_with_yaml_config vendor/bin/phpunit --colors=always"
+        ],
+        "test-php-config": [
+            "APP_ENV=test_grids_with_php_config vendor/bin/phpunit --colors=always"
+        ],
+        "test-with-grids-as-service": [
+            "APP_ENV=test_grids_as_service vendor/bin/phpunit --colors=always"
+        ],
+        "test-with-postgres": [
+            "APP_ENV=test_with_postgres vendor/bin/phpunit --colors=always"
+        ]
+    },
+    "prefer-stable": true
+}

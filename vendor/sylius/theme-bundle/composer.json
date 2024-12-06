@@ -1,0 +1,97 @@
+{
+    "name": "sylius/theme-bundle",
+    "type": "symfony-bundle",
+    "description": "Themes management for Symfony projects.",
+    "keywords": [
+        "themes",
+        "theming"
+    ],
+    "homepage": "https://sylius.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kamil Kokot",
+            "homepage": "https://kamilkokot.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "https://sylius.com"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "symfony/asset": "^5.4 || ^6.4 || ^7.0",
+        "symfony/config": "^5.4 || ^6.4 || ^7.0",
+        "symfony/console": "^5.4 || ^6.4 || ^7.0",
+        "symfony/dependency-injection": "^5.4 || ^6.4 || ^7.0",
+        "symfony/filesystem": "^5.4 || ^6.4 || ^7.0",
+        "symfony/finder": "^5.4 || ^6.4 || ^7.0",
+        "symfony/form": "^4.4 || ^5.4 || ^6.4 || ^7.0",
+        "symfony/framework-bundle": "^5.4 || ^6.4 || ^7.0",
+        "symfony/http-foundation": "^5.4 || ^6.4 || ^7.0",
+        "symfony/http-kernel": "^5.4 || ^6.4 || ^7.0",
+        "symfony/options-resolver": "^5.4 || ^6.4 || ^7.0",
+        "symfony/service-contracts": "^1.1 || ^2.0 || ^3.0",
+        "symfony/translation": "^5.4 || ^6.4 || ^7.0",
+        "symfony/translation-contracts": "^1.1 || ^2.0 || ^3.0"
+    },
+    "require-dev": {
+        "matthiasnoback/symfony-config-test": "^4.2 || ^5.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.2 || ^5.0",
+        "mikey179/vfsstream": "^1.6",
+        "phpspec/phpspec": "^7.0",
+        "phpunit/phpunit": "^9.4",
+        "sylius-labs/coding-standard": "^4.0.2",
+        "symfony/browser-kit": "^5.4 || ^6.4 || ^7.0",
+        "symfony/security-csrf": "^5.4 || ^6.4 || ^7.0",
+        "symfony/twig-bundle": "^5.4 || ^6.4 || ^7.0",
+        "twig/twig": "^2.0 || ^3.0",
+        "vimeo/psalm": "5.20.0",
+        "rector/rector": "^1.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true,
+            "dealerdirect/phpcodesniffer-composer-installer": false
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.2-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Sylius\\Bundle\\ThemeBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "spec\\Sylius\\Bundle\\ThemeBundle\\": "spec/",
+            "Sylius\\Bundle\\ThemeBundle\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "analyse": [
+            "@composer validate --strict",
+            "vendor/bin/ecs check spec src tests || true",
+            "vendor/bin/psalm",
+            "vendor/bin/rector process --dry-run",
+            "tests/Application/bin/console lint:container --env dev",
+            "tests/Application/bin/console lint:container --env prod"
+        ],
+        "fix": [
+            "vendor/bin/rector process",
+            "vendor/bin/ecs check spec src tests --fix"
+        ],
+        "test": [
+            "vendor/bin/phpspec run --ansi --no-interaction",
+            "vendor/bin/phpunit --colors=always",
+            "APP_ENV=test_legacy vendor/bin/phpunit --colors=always --exclude-group=none"
+        ]
+    }
+}

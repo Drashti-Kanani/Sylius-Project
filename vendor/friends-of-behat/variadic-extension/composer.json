@@ -1,0 +1,29 @@
+{
+    "name": "friends-of-behat/variadic-extension",
+    "description": "Variadic support for behat context arguments",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Łukasz Chruściel",
+            "email": "lchrusciel@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "behat/behat": "^3.8",
+        "symfony/dependency-injection": "^5.4 || ^6.4 || ^7.0"
+    },
+    "require-dev": {
+        "friends-of-behat/test-context": "^1.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.5-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "FriendsOfBehat\\VariadicExtension\\": "src/"
+        }
+    }
+}

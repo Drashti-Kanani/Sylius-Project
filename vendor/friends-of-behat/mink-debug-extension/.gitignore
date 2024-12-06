@@ -1,0 +1,7 @@
+/vendor
+/composer.lock
+
+/behat.yml
+
+/test-application/logs/*
+!/test-application/logs/.gitkeep

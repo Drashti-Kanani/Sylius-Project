@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<psalm
+    resolveFromConfigFile="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="src" />
+        <ignoreFiles>
+            <directory name="vendor" />
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <DeprecatedClass>
+            <errorLevel type="suppress">
+                <file name="src/Core/Exception/UserNotFoundException.php" />
+            </errorLevel>
+        </DeprecatedClass>
+        <UndefinedClass>
+            <errorLevel type="suppress">
+                <file name="src/Core/Encoder/EncoderAwareInterface.php" />
+                <file name="src/Core/User/AdvancedUserInterface.php" />
+            </errorLevel>
+        </UndefinedClass>
+        <UnrecognizedStatement>
+            <errorLevel type="suppress">
+                <file name="src/Core/Encoder/EncoderAwareInterface.php" />
+                <file name="src/Core/User/AdvancedUserInterface.php" />
+            </errorLevel>
+        </UnrecognizedStatement>
+        <DuplicateClass>
+            <errorLevel type="suppress">
+                <file name="src/Core/User/UserInterface.php" />
+            </errorLevel>
+        </DuplicateClass>
+    </issueHandlers>
+</psalm>

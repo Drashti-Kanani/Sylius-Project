@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="services/_calendar_services.php" />
+        <import resource="services/api.xml" />
+        <import resource="services/contexts.xml" />
+        <import resource="services/elements.xml" />
+        <import resource="services/pages.xml" />
+    </imports>
+
+    <services>
+        <defaults public="true" />
+
+        <service id="sylius.behat.cookie_setter" class="Sylius\Behat\Service\Setter\CookieSetter" public="false">
+            <argument type="service" id="behat.mink.default_session" />
+            <argument type="service" id="behat.mink.parameters" />
+        </service>
+
+        <service id="sylius.behat.channel_context_setter" class="Sylius\Behat\Service\Setter\ChannelContextSetter" public="false">
+            <argument type="service" id="sylius.behat.cookie_setter" />
+        </service>
+
+        <service id="sylius.behat.admin_security" class="Sylius\Behat\Service\SecurityService" public="false">
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="sylius.behat.cookie_setter" />
+            <argument type="string">admin</argument>
+            <argument type="service" id="session.factory" on-invalid="null" />
+        </service>
+
+        <service id="sylius.behat.api_security" class="Sylius\Behat\Service\ApiSecurityService" public="true">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="lexik_jwt_authentication.jwt_manager" />
+        </service>
+
+        <service id="sylius.behat.shop_security" class="Sylius\Behat\Service\SecurityService" public="false">
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="sylius.behat.cookie_setter" />
+            <argument type="string">shop</argument>
+            <argument type="service" id="session.factory" on-invalid="null" />
+        </service>
+
+        <service id="Sylius\Behat\Service\SessionManagerInterface" class="Sylius\Behat\Service\SessionManager" public="false">
+            <argument type="service" id="behat.mink" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.shop_security" />
+        </service>
+
+        <service id="sylius.behat.shared_security" class="Sylius\Behat\Service\SharedSecurityService" public="false">
+            <argument type="service" id="sylius.behat.admin_security" />
+        </service>
+
+        <service id="sylius.behat.api.shared_security" class="Sylius\Behat\Service\SharedSecurityService" public="false">
+            <argument type="service" id="sylius.behat.api_security" />
+        </service>
+
+        <service id="sylius.behat.table_accessor" class="Sylius\Behat\Service\Accessor\TableAccessor" public="false" />
+
+        <service id="sylius.behat.checker.image_existence" class="Sylius\Behat\Service\Checker\ImageExistenceChecker">
+            <argument type="service" id="sylius.liip.filter_service" />
+            <argument type="string">%sylius_core.public_dir%</argument>
+        </service>
+
+        <service id="sylius.behat.paypal_api_mocker" class="Sylius\Behat\Service\Mocker\PaypalApiMocker" public="false">
+            <argument type="service" id="sylius.behat.mocker" />
+            <argument type="service" id="sylius.behat.response_loader" />
+        </service>
+
+        <service id="sylius.behat.mocker" class="Sylius\Behat\Service\Mocker\Mocker" public="false">
+            <argument type="service" id="service_container" />
+        </service>
+
+        <service id="sylius.behat.response_loader" class="Sylius\Behat\Service\ResponseLoader" public="false" />
+
+        <service id="sylius.behat.notification_accessor" class="Sylius\Behat\Service\Accessor\NotificationAccessor" public="false">
+            <argument type="service" id="behat.mink.default_session" />
+        </service>
+
+        <service id="sylius.behat.notification_checker" class="Sylius\Behat\Service\NotificationChecker" public="false">
+            <argument type="service" id="sylius.behat.notification_accessor" />
+        </service>
+
+        <service id="sylius.behat.current_page_resolver" class="Sylius\Behat\Service\Resolver\CurrentPageResolver" public="false">
+            <argument type="service" id="behat.mink.default_session" />
+            <argument type="service" id="router" />
+        </service>
+
+        <service id="sylius.behat.shared_storage" class="Sylius\Behat\Service\SharedStorage" public="false"/>
+
+        <service id="sylius.behat.java_script_test_helper" class="Sylius\Behat\Service\Helper\JavaScriptTestHelper" >
+            <argument>1000000</argument>
+            <argument>7</argument>
+        </service>
+
+        <service id="sylius.behat.email_checker" class="Sylius\Behat\Service\Checker\EmailChecker">
+            <argument type="service" id="Sylius\Behat\Service\Provider\EmailMessagesProviderInterface" />
+        </service>
+
+        <service id="Sylius\Behat\Service\Provider\EmailMessagesProviderInterface" class="Sylius\Behat\Service\Provider\EmailMessagesProvider">
+            <argument type="service" id="test.mailer_pool" />
+        </service>
+
+        <service id="sylius.behat.message_send_cacher" class="Sylius\Behat\Service\MessageSendCacher">
+            <argument type="service" id="test.mailer_pool" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="sylius.behat.section_iri_converter" class="Sylius\Behat\Service\Converter\SectionAwareIriConverter" public="false">
+            <argument type="service" id="api_platform.route_name_resolver" />
+            <argument type="service" id="api_platform.router" />
+            <argument type="service" id="api_platform.metadata.property.name_collection_factory" />
+            <argument type="service" id="api_platform.metadata.property.metadata_factory" />
+            <argument type="service" id="api_platform.property_accessor" />
+            <argument type="service" id="api_platform.identifiers_extractor.cached" />
+            <argument type="service" id="api_platform.resource_class_resolver" />
+            <argument type="service" id="api_platform.metadata.resource.metadata_factory" />
+        </service>
+
+        <service id="api_platform.iri_converter" class="Sylius\Behat\Service\Converter\IriConverter">
+            <argument type="service" id="api_platform.iri_converter.legacy" />
+            <argument type="service" id="api_platform.symfony.iri_converter" />
+        </service>
+    </services>
+</container>

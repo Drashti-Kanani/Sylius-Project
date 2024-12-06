@@ -1,0 +1,53 @@
+{
+    "name": "sylius/registry",
+    "type": "library",
+    "description": "Services registry.",
+    "keywords": ["registry", "services"],
+    "homepage": "http://sylius.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.com"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": "^7.4 || ^8.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^7.0",
+        "sylius-labs/coding-standard": "^3.2.2",
+        "vimeo/psalm": "4.4.1"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Component\\Registry\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "spec\\Sylius\\Component\\Registry\\": "spec/" }
+    },
+    "scripts": {
+        "analyse": [
+            "vendor/bin/ecs check spec src || true",
+            "vendor/bin/psalm"
+        ],
+        "fix": [
+            "vendor/bin/ecs check spec src --fix"
+        ],
+        "test": [
+            "vendor/bin/phpspec run --ansi --no-interaction"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.6-dev"
+        }
+    }
+}

@@ -1,0 +1,26 @@
+includes:
+    - vendor/phpstan/phpstan-doctrine/extension.neon
+    - vendor/phpstan/phpstan-doctrine/rules.neon
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-phpunit/rules.neon
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - vendor/phpstan/phpstan-symfony/rules.neon
+    - vendor/phpstan/phpstan-webmozart-assert/extension.neon
+
+parameters:
+    level: 6
+
+    reportUnmatchedIgnoredErrors: false
+
+    paths:
+        - 'src/'
+        - 'tests/'
+
+    excludePaths:
+        - 'tests/Application/**.php'
+
+    ignoreErrors:
+        - '/Property .*\:\:\$container has no type specified\./'
+        - '/Static property .*\:\:\$container \(.*\\Test\\TestContainer\) does not accept Symfony\\Component\\DependencyInjection\\ContainerInterface\./'
+        - '/PHPDoc tag \@var for variable \$manager contains unknown class Doctrine\\ODM\\MongoDB\\DocumentManager\./'
+        - '/PHPDoc tag \@var for variable \$manager contains unknown class Doctrine\\ODM\\PHPCR\\DocumentManagerInterface\./'

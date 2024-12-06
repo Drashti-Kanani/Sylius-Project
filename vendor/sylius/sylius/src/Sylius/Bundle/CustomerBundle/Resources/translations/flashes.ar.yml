@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    customer:
+        register: 'شكرا لك لتسجيل وفحص البريد الإلكتروني الخاص بك للتحقق من الحساب الخاص بك.'

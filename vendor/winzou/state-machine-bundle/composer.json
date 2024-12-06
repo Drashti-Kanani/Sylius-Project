@@ -1,0 +1,30 @@
+{
+    "name": "winzou/state-machine-bundle",
+    "type": "symfony-bundle",
+    "description": "Bundle for the very lightweight yet powerful PHP state machine",
+    "keywords": ["symfony", "bundle", "statemachine"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexandre Bacco",
+            "homepage": "http://alex.bacco.fr"
+        }
+    ],
+    "require": {
+        "php":                      "^7.4|^8.0|^8.1",
+        "winzou/state-machine":     "~0.4",
+        "symfony/framework-bundle": "^4.4|^5.4|^6.0|^7.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^5.0|^6.0|^7.0"
+    },
+    "autoload": {
+        "psr-4": { "winzou\\Bundle\\StateMachineBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "spec\\": "spec/" }
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}

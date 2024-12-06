@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        catalog_promotion:
+            name: 이름
+        promotion:
+            name: 이름
+        promotion_action:
+            type: 타입
+        promotion_rule:
+            shipping_country_configuration:
+                country: 국가
+            type: 타입

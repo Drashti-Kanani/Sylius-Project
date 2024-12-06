@@ -1,0 +1,82 @@
+imports:
+    - { resource: "@SyliusUiBundle/Resources/config/app/config.yml" }
+
+    - { resource: "@SyliusAdminBundle/Resources/config/app/events.yaml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/app/sylius/sylius_mailer.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/address_log_entry.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/admin_user.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/catalog_promotion.yaml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/channel.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/channel_pricing_log_entry.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/country.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/currency.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/customer.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/customer_group.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/customer_order.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/exchange_rate.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/inventory.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/locale.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/order.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/payment.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/payment_method.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/product.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/product_association_type.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/product_attribute.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/product_from_taxon.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/product_option.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/product_review.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/product_variant.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/product_variant_with_catalog_promotion.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/promotion.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/promotion_coupon.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/shipment.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/shipping_category.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/shipping_method.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/tax_category.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/tax_rate.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/taxon.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/zone.yml" }
+
+parameters:
+    env(SYLIUS_ADMIN_ROUTING_PATH_NAME): admin
+    sylius_admin.path_name: '%env(resolve:SYLIUS_ADMIN_ROUTING_PATH_NAME)%'
+    sylius.security.admin_regex: "^/%sylius_admin.path_name%"
+
+webpack_encore:
+    builds:
+        admin: '%kernel.project_dir%/public/build/admin'
+
+sylius_grid:
+    templates:
+        action:
+            create_payment_method: "@SyliusAdmin/PaymentMethod/Grid/Action/create.html.twig"
+            create_product_attribute: "@SyliusAdmin/ProductAttribute/Grid/Action/create.html.twig"
+            generate_variants: "@SyliusAdmin/Product/Grid/Action/generateVariants.html.twig"
+            ship_with_tracking_code: "@SyliusAdmin/Shipment/Grid/Action/shipWithTrackingCode.html.twig"
+            update_product_positions: "@SyliusAdmin/Product/Grid/Action/updatePositions.html.twig"
+            update_product_variant_positions: "@SyliusAdmin/ProductVariant/Grid/Action/updatePositions.html.twig"
+        filter:
+            entities: '@SyliusUi/Grid/Filter/entities.html.twig'
+            resource_autocomplete: '@SyliusUi/Grid/Filter/resourceAutocomplete.html.twig'
+
+liip_imagine:
+    filter_sets:
+        sylius_admin_product_original: ~
+        sylius_admin_admin_user_avatar_thumbnail:
+            filters:
+                thumbnail: { size: [50, 50], mode: outbound }
+        sylius_admin_product_tiny_thumbnail:
+            filters:
+                thumbnail: { size: [64, 64], mode: outbound }
+        sylius_admin_product_thumbnail:
+            filters:
+                thumbnail: { size: [50, 50], mode: outbound }
+        sylius_admin_product_small_thumbnail:
+            filters:
+                thumbnail: { size: [150, 112], mode: outbound }
+        sylius_admin_product_large_thumbnail:
+            filters:
+                thumbnail: { size: [550, 412], mode: outbound }
+
+sonata_block:
+    default_contexts: ~

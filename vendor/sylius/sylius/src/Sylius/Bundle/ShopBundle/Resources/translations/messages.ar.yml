@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    email:
+        order_confirmation:
+            subject: 'تأكيد طلب الشراء'
+            view_order_or_change_payment_method: 'عرض النظام أو تغيير طريقة الدفع'
+        password_reset:
+            hello: 'مرحباً'
+        verification_token:
+            hello: 'مرحباً'
+    lightbox:
+        image_album_label: 'الصورة   من %1 إلى %2'
+    menu:
+        shop:
+            account:
+                address_book: 'عنوان الكتاب'
+                change_password: 'تغيير كلمة المرور'
+                dashboard: 'لوحة التحكم'
+                header: 'حسابك'
+                order_history: 'تاريخ الطلب'
+                personal_information: 'المعلومات الشخصية'

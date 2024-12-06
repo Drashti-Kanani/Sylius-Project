@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+
+  tests:
+    name: Tests
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        php: [ '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3' ]
+      fail-fast: false
+    env:
+      MATRIX_PHP: ${{ matrix.php }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          coverage: "xdebug"
+          php-version: "${{ matrix.php }}"
+          extensions: gd, zip
+          tools: composer
+          ini-values: error_reporting=-1, display_errors=On
+      - name: Install dependencies
+        run: |
+          composer install --no-interaction --no-scripts --no-progress --prefer-dist
+      - uses: browser-actions/setup-chrome@latest
+      - run: chrome --version
+      - name: Add browser drivers
+        uses: nanasess/setup-chromedriver@v2
+      - name: Setup Mink test server
+        run: |
+          mkdir ./logs
+          ./vendor/bin/mink-test-server &> ./logs/mink-test-server.log &
+      - name: Remove preinstalled chromedriver bin from ubuntu
+        run: sudo rm -rf /usr/local/share/chrome_driver
+      - name: Run tests
+        run: |
+          vendor/bin/phpunit -v --coverage-clover=coverage.xml
+      - name: Upload coverage
+        uses: codecov/codecov-action@v2
+        with:
+          files: coverage.xml
+      - name: Archive logs artifacts
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: logs_php-${{ matrix.php }}
+          path: |
+            logs

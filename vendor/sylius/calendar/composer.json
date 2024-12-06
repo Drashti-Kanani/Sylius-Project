@@ -1,0 +1,62 @@
+{
+    "name": "sylius/calendar",
+    "type": "library",
+    "version": "v0.5.0",
+    "description": "Date handling for PHP applications.",
+    "keywords": [
+        "calendar",
+        "date",
+        "time",
+        "client"
+    ],
+    "homepage": "https://sylius.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adam Kasperczak",
+            "email": "adam.kasperczak@sylius.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "https://sylius.com"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/Sylius/Calendar/contributors"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "symfony/framework-bundle": "^5.4 || ^6.0"
+    },
+    "require-dev": {
+        "behat/behat": "^3.10",
+        "friends-of-behat/symfony-extension": "^2.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.3",
+        "phpspec/phpspec": "^7.2",
+        "phpunit/phpunit": "^9.5.24",
+        "symfony/flex": "^2.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sylius\\Calendar\\": "src/",
+            "Sylius\\Calendar\\Tests\\Behat\\": "tests/Behat/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "spec\\Sylius\\Calendar\\": "spec/",
+            "Sylius\\Calendar\\Tests\\Application\\": "tests/Application/src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.0-dev"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true
+        }
+    }
+}

@@ -1,0 +1,75 @@
+sylius_grid:
+    grids:
+        sylius_admin_customer:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.customer.class%"
+            sorting:
+                createdAt: desc
+            fields:
+                firstName:
+                    type: string
+                    label: sylius.ui.first_name
+                    sortable: ~
+                lastName:
+                    type: string
+                    label: sylius.ui.last_name
+                    sortable: ~
+                email:
+                    type: string
+                    label: sylius.ui.email
+                    sortable: ~
+                createdAt:
+                    type: datetime
+                    label: sylius.ui.registration_date
+                    sortable: ~
+                    options:
+                        format: d-m-Y H:i
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    path: .
+                    options:
+                        template: "@SyliusAdmin/Customer/Grid/Field/enabled.html.twig"
+                verified:
+                    type: twig
+                    label: sylius.ui.verified
+                    path: .
+                    options:
+                        template: "@SyliusAdmin/Customer/Grid/Field/verified.html.twig"
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [email, firstName, lastName]
+                group:
+                    type: resource_autocomplete
+                    label: sylius.ui.customer_groups
+                    form_options:
+                        resource: sylius.customer_group
+                        choice_name: name
+                        choice_value: code
+                        multiple: true
+                        remote_path: sylius_admin_ajax_customer_groups_by_phrase
+                        load_edit_path: sylius_admin_ajax_customer_group_by_code
+                    options:
+                        fields: [group.code]
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    show_orders:
+                        type: show
+                        label: sylius.ui.show_orders
+                        options:
+                            link:
+                                route: sylius_admin_customer_order_index
+                                parameters:
+                                    id: resource.id
+                    show:
+                        type: show
+                    update:
+                        type: update

@@ -1,0 +1,34 @@
+{
+    "name": "polishsymfonycommunity/symfony-mocker-container",
+    "description": "Provides base Symfony dependency injection container enabling service mocking.",
+    "keywords": ["behat", "mockery", "mock", "bdd", "tdd", "test"],
+    "homepage": "http://symfonylab.pl",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jakub Zalas",
+            "email": "jakub@zalas.pl",
+            "homepage": "http://www.zalas.eu"
+        },
+        {
+            "name": "Polish Symfony Community",
+            "homepage": "http://symfonylab.pl"
+        }
+    ],
+    "require": {
+        "php":                          "^8.0",
+        "symfony/dependency-injection": "^4.3 || ^5.0 || ^6.0 || ^7.0",
+        "mockery/mockery":              "^1.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.4"
+    },
+    "autoload": {
+        "psr-4": { "PSS\\SymfonyMockerContainer\\": "src/" }
+    },
+    "extra": {
+        "symfony": {
+            "require": "7.0.*"
+        }
+    }
+}

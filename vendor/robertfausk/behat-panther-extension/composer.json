@@ -1,0 +1,87 @@
+{
+    "name": "robertfausk/behat-panther-extension",
+    "type": "behat-extension",
+    "description": "Symfony Panther extension for Behat",
+    "keywords": [
+        "behat",
+        "gherkin",
+        "cucumber",
+        "symfony",
+        "panther",
+        "web",
+        "test",
+        "browser",
+        "chrome",
+        "firefox",
+        "gui"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Robert Freigang",
+            "email": "robertfreigang@gmx.de"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "behat/behat": "^3.0.5",
+        "robertfausk/mink-panther-driver": "^1.0",
+        "symfony/config": "^3.4|^4.0|^5.0|^6.0|^7.0",
+        "friends-of-behat/mink-extension": "^2.3.0"
+    },
+    "require-dev": {
+        "g1a/composer-test-scenarios": "^3.0",
+        "matthiasnoback/symfony-config-test": "^4.1|^5.1",
+        "phpunit/phpunit": "~7.5|~9.3",
+        "roave/security-advisories": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Robertfausk\\Behat\\PantherExtension\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "g1a/composer-test-scenarios": true,
+            "pyrech/composer-changelogs": true
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.1.x-dev"
+        },
+        "scenarios": {
+            "symfony7": {
+                "require": {
+                    "symfony/config": "^7.0"
+                }
+            },
+            "symfony6": {
+                "require": {
+                    "symfony/config": "^6.0"
+                }
+            },
+            "symfony5": {
+                "require": {
+                    "symfony/config": "^5.0"
+                }
+            },
+            "symfony4": {
+                "require": {
+                    "symfony/config": "^4.0"
+                }
+            },
+            "symfony3": {
+                "require": {
+                    "symfony/config": "^3.4"
+                }
+            }
+        }
+    }
+}

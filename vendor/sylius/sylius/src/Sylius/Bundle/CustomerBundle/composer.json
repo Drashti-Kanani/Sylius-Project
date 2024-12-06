@@ -1,0 +1,88 @@
+{
+    "name": "sylius/customer-bundle",
+    "type": "symfony-bundle",
+    "description": "Customers management for Symfony projects.",
+    "keywords": [
+        "customer",
+        "groups"
+    ],
+    "homepage": "https://sylius.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "https://pjedrzejewski.com"
+        },
+        {
+            "name": "Michał Marcinkowski",
+            "email": "michal.marcinkowski@lakion.com"
+        },
+        {
+            "name": "Łukasz Chruściel",
+            "email": "lukasz.chrusciel@lakion.com"
+        },
+        {
+            "name": "Bartosz Siejka",
+            "homepage": "http://bsiejka.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "https://sylius.com"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "doctrine/orm": "^2.13",
+        "egulias/email-validator": "^3.1",
+        "sylius/customer": "^1.13",
+        "sylius/resource-bundle": "^1.9",
+        "symfony/framework-bundle": "^5.4.21 || ^6.4",
+        "webmozart/assert": "^1.9"
+    },
+    "conflict": {
+        "twig/twig": "^3.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^7.2",
+        "phpunit/phpunit": "^9.5",
+        "polishsymfonycommunity/symfony-mocker-container": "^1.0",
+        "symfony/browser-kit": "^5.4.21 || ^6.4",
+        "symfony/dependency-injection": "^5.4.21 || ^6.4",
+        "symfony/form": "^5.4.21 || ^6.4"
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.13-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Sylius\\Bundle\\CustomerBundle\\": ""
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sylius\\Bundle\\CustomerBundle\\spec\\": "spec/"
+        },
+        "classmap": [
+            "test/app/AppKernel.php"
+        ]
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

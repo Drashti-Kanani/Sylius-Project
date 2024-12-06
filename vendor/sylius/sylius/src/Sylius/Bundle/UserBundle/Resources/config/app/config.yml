@@ -1,0 +1,26 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+security:
+    password_hashers:
+        argon2i: argon2i
+
+when@test:
+    security:
+        password_hashers:
+            plaintext: plaintext
+
+when@test_cached:
+    security:
+        password_hashers:
+            plaintext: plaintext
+
+sylius_user:
+    encoder: argon2i
+
+jms_serializer:
+    metadata:
+        directories:
+            sylius-user:
+                namespace_prefix: "Sylius\\Component\\User"
+                path: "@SyliusUserBundle/Resources/config/serializer"

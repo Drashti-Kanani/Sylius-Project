@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    menu:
+        shop:
+            account:
+                address_book: 'Adressebok'
+                change_password: 'Endre passord'
+                dashboard: 'Kontrollpanel'
+                header: 'Din konto'
+                order_history: 'Ordrehistorikk'
+                personal_information: 'Personlig informasjon'

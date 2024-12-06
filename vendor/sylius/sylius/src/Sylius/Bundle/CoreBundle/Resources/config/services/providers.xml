@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="sylius.provider.channel_based_default_zone_provider" class="Sylius\Bundle\CoreBundle\Provider\ChannelBasedDefaultTaxZoneProvider" />
+
+        <service id="Sylius\Bundle\CoreBundle\Provider\ChannelBasedProductTranslationProviderInterface" class="Sylius\Bundle\CoreBundle\Provider\ChannelBasedProductTranslationProvider">
+            <argument type="service" id="sylius.context.locale" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Provider\CustomerProviderInterface" class="Sylius\Bundle\CoreBundle\Provider\CustomerProvider" >
+            <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="sylius.canonicalizer" />
+        </service>
+
+        <service id="sylius.provider.product_variants_prices" class="Sylius\Component\Core\Provider\ProductVariantsPricesProvider">
+            <argument type="service" id="sylius.calculator.product_variant_price" />
+        </service>
+        <service id="Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface" alias="sylius.provider.product_variants_prices" />
+
+        <service id="sylius.translation_locale_provider.admin" class="Sylius\Component\Core\Provider\TranslationLocaleProvider">
+            <argument type="service" id="sylius.locale_collection_provider" />
+            <argument type="string">%locale%</argument>
+        </service>
+
+        <service id="Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface" class="Sylius\Component\Core\Statistics\Provider\StatisticsProvider" >
+            <argument type="service" id="Sylius\Component\Core\Statistics\Provider\SalesStatisticsProviderInterface" />
+            <argument type="service" id="Sylius\Component\Core\Statistics\Provider\BusinessActivitySummaryProviderInterface"/>
+        </service>
+
+        <service id="Sylius\Component\Core\Statistics\Provider\BusinessActivitySummaryProviderInterface" class="Sylius\Component\Core\Statistics\Provider\BusinessActivitySummaryProvider">
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.repository.customer" />
+        </service>
+
+        <service id="Sylius\Component\Core\Statistics\Provider\SalesStatisticsProviderInterface" class="Sylius\Component\Core\Statistics\Provider\SalesStatisticsProvider">
+            <argument type="service" id="Sylius\Component\Core\Statistics\Registry\OrdersTotalsProvidersRegistryInterface" />
+            <argument>%sylius_core.orders_statistics.intervals_map%</argument>
+        </service>
+
+        <service id="sylius.orders_totals_provider.day" class="Sylius\Component\Core\Statistics\Provider\OrdersTotals\DayBasedOrdersTotalProvider">
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="sylius.statistics.orders_totals_provider" type="day" />
+        </service>
+
+        <service id="sylius.orders_totals_provider.month" class="Sylius\Component\Core\Statistics\Provider\OrdersTotals\MonthBasedOrdersTotalProvider">
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="sylius.statistics.orders_totals_provider" type="month" />
+        </service>
+
+        <service id="sylius.orders_totals_provider.year" class="Sylius\Component\Core\Statistics\Provider\OrdersTotals\YearBasedOrdersTotalProvider">
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="sylius.statistics.orders_totals_provider" type="year" />
+        </service>
+    </services>
+</container>

@@ -1,0 +1,103 @@
+name: Build
+
+on:
+    push: ~
+    pull_request: ~
+    release:
+        types: [created]
+    schedule:
+        -
+            cron: "0 1 * * 6" # Run at 1am every Saturday
+    workflow_dispatch: ~
+
+jobs:
+    tests:
+        runs-on: ubuntu-latest
+        name: "PHP ${{ matrix.php }}${{ matrix.symfony != '' && format(', Symfony {0}', matrix.symfony) || '' }}${{ matrix.symfony-contracts != '' && format(', Contracts {0}', matrix.symfony-contracts) || '' }}${{ matrix.twig != '' && format(', Twig {0}', matrix.twig) || '' }}"
+        strategy:
+            fail-fast: false
+            matrix:
+                php: [ "8.1", "8.2", "8.3" ]
+                symfony: [ "^5.4", "^6.4", "^7.0" ]
+                twig: [ "3.*" ]
+
+                exclude:
+                    -
+                        php: "8.1"
+                        symfony: "^7.0"
+
+        steps:
+            -
+                uses: actions/checkout@v4
+
+            -
+                name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: "${{ matrix.php }}"
+                    coverage: none
+
+            -
+                name: Restrict Symfony version
+                if: matrix.symfony != ''
+                run: |
+                    composer global config --no-plugins allow-plugins.symfony/flex true
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^2.4"
+                    composer config extra.symfony.require "${{ matrix.symfony }}"
+
+            -
+                name: Update Symfony Contracts version
+                if: matrix.symfony-contracts != ''
+                run: composer require "symfony/translation-contracts:${{ matrix.symfony-contracts }}" "symfony/service-contracts:${{ matrix.symfony-contracts }}" --no-update --no-scripts
+
+            -
+                name: Update Twig version
+                if: matrix.twig != ''
+                run: composer require --dev "twig/twig:${{ matrix.twig }}" --no-update --no-scripts
+
+            -
+                name: Remove analyse dependencies
+                run: |
+                    composer remove vimeo/psalm --dev --no-update
+                    composer remove sylius-labs/coding-standard --dev --no-update
+                    composer remove rector/rector --dev --no-update
+
+            -
+                name: Install dependencies
+                run: composer update
+
+            -
+                name: Run tests
+                run: composer test
+
+    analyse:
+        runs-on: ubuntu-latest
+        name: "PHP Analyse"
+        strategy:
+            fail-fast: false
+
+        steps:
+            -
+                uses: actions/checkout@v4
+
+            -
+                name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: "8.1"
+                    coverage: none
+
+            -
+                name: Restrict Symfony version
+                run: |
+                    composer global config --no-plugins allow-plugins.symfony/flex true
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^2.4"
+                    composer config extra.symfony.require "6.4.*"
+
+            -
+                name: Install dependencies
+                run: composer update
+
+            -
+                name: Run analysis
+                run: composer analyse

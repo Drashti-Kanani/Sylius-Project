@@ -1,0 +1,36 @@
+sylius_admin_promotion:
+    resource: |
+        alias: sylius.promotion
+        section: admin
+        templates: "@SyliusAdmin\\Crud"
+        except: ['show']
+        redirect: update
+        grid: sylius_admin_promotion
+        permission: true
+        vars:
+            all:
+                subheader: sylius.ui.manage_discounts_and_promotional_campaigns
+                templates:
+                    form: "@SyliusAdmin/Promotion/_form.html.twig"
+            index:
+                icon: in cart
+            update:
+                templates:
+                    form: "@SyliusAdmin/Promotion/_form.html.twig"
+                    toolbar: "@SyliusAdmin/Promotion/_toolbar.html.twig"
+    type: sylius.resource
+
+sylius_admin_promotion_archive:
+    path: /promotions/{id}/archive
+    methods: [PATCH]
+    defaults:
+        _controller: sylius.controller.promotion::updateAction
+        _sylius:
+            section: admin
+            permission: true
+            template: '@SyliusUi/Grid/Action/archive.html.twig'
+            form:
+                type: Sylius\Bundle\ResourceBundle\Form\Type\ArchivableType
+            redirect:
+                route: sylius_admin_promotion_index
+                parameters: {}

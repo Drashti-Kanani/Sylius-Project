@@ -1,0 +1,64 @@
+{
+    "name": "sylius/currency",
+    "type": "library",
+    "description": "Currency handling for PHP applications.",
+    "keywords": [
+        "cash",
+        "currency",
+        "money",
+        "currencies"
+    ],
+    "homepage": "https://sylius.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "https://pjedrzejewski.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "https://sylius.com"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "sylius/resource": "^1.9",
+        "symfony/intl": "^5.4.21 || ^6.4",
+        "laminas/laminas-stdlib": "^3.3.1"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^7.2"
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.13-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Sylius\\Component\\Currency\\": ""
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sylius\\Component\\Currency\\spec\\": "spec/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
