@@ -1,4 +1,0 @@
-suites:
-    main:
-        namespace: Vivan\SyliusHasOrderedTodayPlugin
-        psr4_prefix: Vivan\SyliusHasOrderedTodayPlugin
